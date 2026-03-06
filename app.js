@@ -10,6 +10,9 @@ const MAX_ANGLE = 30;
 const MIN_WEIGHT = 1;
 const MAX_WEIGHT = 10;
 
+const SMALL_WEIGHT = 3;
+const MEDIUM_WEIGHT = 7;
+
 let state = {
   objects: [],
   angle: 0,
@@ -20,6 +23,12 @@ let previewWeight = null;
 
 function getRandomWeight() {
   return Math.floor(Math.random() * (MAX_WEIGHT - MIN_WEIGHT + 1)) + MIN_WEIGHT;
+}
+
+function getWeightClass(weight) {
+  if (weight <= SMALL_WEIGHT) return 'weight-small';
+  if (weight <= MEDIUM_WEIGHT) return 'weight-medium';
+  return 'weight-large';
 }
 
 function handlePlankClick(event) {
@@ -39,6 +48,11 @@ function handlePlankClick(event) {
   state.objects.push(newObject);
 
   state.nextWeight = getRandomWeight();
+
+  if (previewWeight) {
+    previewWeight.textContent = state.nextWeight;
+    previewWeight.classList.add(getWeightClass(state.nextWeight));
+  }
 
   calculatePhysics();
   renderWeights();
@@ -65,6 +79,7 @@ function handlePlankMove(event) {
   previewWeight.style.display = 'flex';
   previewWeight.style.left = `${position}px`;
   previewWeight.textContent = state.nextWeight;
+  previewWeight.classList.add(getWeightClass(state.nextWeight));
 }
 
 function handlePlankLeave() {
@@ -92,6 +107,7 @@ function renderWeights() {
     const weightElement = document.createElement('div');
 
     weightElement.classList.add('weight');
+    weightElement.classList.add(getWeightClass(item.weight));
 
     weightElement.style.left = `${item.position}px`;
     weightElement.textContent = item.weight;
