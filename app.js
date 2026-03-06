@@ -5,6 +5,7 @@ const nextWeightElement = document.querySelector('.next-weight-value');
 const angleElement = document.querySelector('.angle-value');
 const resetButton = document.querySelector('.btn');
 const logsListElement = document.querySelector('.log-list');
+const logsContainerElement = document.querySelector('.logs');
 
 const STORAGE_KEY = 'seesaw-state';
 
@@ -107,7 +108,7 @@ function renderLogs() {
     logsListElement.append(li);
   }
 
-  logsListElement.scrollTop = 0;
+  logsContainerElement.scrollTop = 0;
 }
 
 function updateInfo() {
