@@ -55,3 +55,9 @@ function renderWeights() {
 
   plankElement.style.transform = `rotate(${state.angle}deg)`;
 }
+
+function init() {
+  plankElement.addEventListener('click', handlePlankClick);
+}
+
+init();
