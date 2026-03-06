@@ -92,3 +92,32 @@ main {
   border-bottom: 45px solid #ffffff;
   bottom: 150px;
 }
+
+.controls {
+  width: 100%;
+}
+
+.controls-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  background: #fd5c27;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 30px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease-in-out,
+    transform 0.2s ease-in-out;
+}
+
+.btn:hover {
+  background: #ff6336;
+  transform: scale(1.02);
+}
