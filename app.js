@@ -15,6 +15,8 @@ let state = {
   nextWeight: getRandomWeight(),
 }
 
+let previewWeight = null;
+
 function getRandomWeight() {
   return Math.floor(Math.random() * (MAX_WEIGHT - MIN_WEIGHT + 1)) + MIN_WEIGHT;
 }
@@ -40,6 +42,34 @@ function handlePlankClick(event) {
   calculatePhysics();
   renderWeights();
   updateInfo();
+}
+
+function handlePlankMove(event) {
+  const position = event.offsetX;
+  const plankWidth = plankElement.clientWidth;
+
+  if (position < 0 || position > plankWidth) {
+    if (previewWeight) {
+      previewWeight.style.display = 'none';
+    }
+    return;
+  }
+
+  if (!previewWeight) {
+    previewWeight = document.createElement('div');
+    previewWeight.classList.add('weight', 'weight-preview');
+    plankElement.append(previewWeight);
+  }
+
+  previewWeight.style.display = 'flex';
+  previewWeight.style.left = `${position}px`;
+  previewWeight.textContent = state.nextWeight;
+}
+
+function handlePlankLeave() {
+  if (previewWeight) {
+    previewWeight.style.display = 'none';
+  }
 }
 
 function renderWeights() {
@@ -100,6 +130,8 @@ function updateInfo() {
 
 function init() {
   plankElement.addEventListener('click', handlePlankClick);
+  plankElement.addEventListener('mousemove', handlePlankMove);
+  plankElement.addEventListener('mouseleave', handlePlankLeave);
 }
 
 init();
