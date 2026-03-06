@@ -26,3 +26,37 @@ main {
   justify-content: center;
   gap: 32px;
 }
+
+.info-panel {
+  width: 100%;
+}
+
+.info-box-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.info-box {
+  background: #18181b;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  font-size: 17px;
+  color: #fd5c27;
+  font-weight: 600;
+}
+
+.value {
+  font-size: 20px;
+  color: #ffffff;
+  font-weight: 600;
+}
