@@ -5,6 +5,8 @@ const nextWeightElement = document.querySelector('.next-weight-value');
 const angleElement = document.querySelector('.angle-value');
 const resetButton = document.querySelector('.btn');
 
+const STORAGE_KEY = 'seesaw-state';
+
 const MAX_ANGLE = 30;
 
 const MIN_WEIGHT = 1;
@@ -57,6 +59,7 @@ function handlePlankClick(event) {
   calculatePhysics();
   renderWeights();
   updateInfo();
+  saveLocalStorage();
 }
 
 function handlePlankMove(event) {
@@ -96,6 +99,8 @@ function handleReset() {
 
   renderWeights();
   updateInfo();
+
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 function renderWeights() {
@@ -155,7 +160,34 @@ function updateInfo() {
   angleElement.textContent = `${state.angle.toFixed(1)}°`;
 }
 
+function saveLocalStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadLocalStorage() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  console.log(saved);
+  if (!saved) return;
+  console.log(saved);
+
+  try {
+    const parsed = JSON.parse(saved);
+
+    state.objects = Array.isArray(parsed.objects) ? parsed.objects : [];
+    state.angle = typeof parsed.angle === 'number' ? parsed.angle : 0;
+    state.nextWeight = typeof parsed.nextWeight === 'number' ? parsed.nextWeight : getRandomWeight();
+  } catch (error) {
+    console.error('Error loading data from local storage:', error);
+  }
+}
+
 function init() {
+  loadLocalStorage();
+
+  calculatePhysics();
+  renderWeights();
+  updateInfo();
+
   plankElement.addEventListener('click', handlePlankClick);
   plankElement.addEventListener('mousemove', handlePlankMove);
   plankElement.addEventListener('mouseleave', handlePlankLeave);
