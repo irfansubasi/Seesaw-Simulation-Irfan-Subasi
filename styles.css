@@ -125,6 +125,7 @@ main {
 
 .weight {
   position: absolute;
+  bottom: 100%;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -133,4 +134,8 @@ main {
   font-weight: 600;
   color: #000000;
   transform: translateX(-50%);
+  background: #22c55e;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ffffff;
 }
