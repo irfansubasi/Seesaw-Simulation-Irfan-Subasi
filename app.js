@@ -33,4 +33,25 @@ function handlePlankClick(event) {
   state.objects.push(newObject);
 
   state.nextWeight = getRandomWeight();
+
+  renderWeights();
+}
+
+function renderWeights() {
+  const existingWeights = document.querySelectorAll('.weight');
+
+  existingWeights.forEach(item => item.remove());
+
+  for (const item of state.objects) {
+    const weightElement = document.createElement('div');
+
+    weightElement.classList.add('weight');
+
+    weightElement.style.left = `${item.position}px`;
+    weightElement.textContent = item.weight;
+
+    plankElement.append(weightElement);
+  }
+
+  plankElement.style.transform = `rotate(${state.angle}deg)`;
 }
