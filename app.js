@@ -23,6 +23,9 @@ let state = {
 
 let previewWeight = null;
 
+let distanceLine = null;
+let distanceLabel = null;
+
 function getRandomWeight() {
   return Math.floor(Math.random() * (MAX_WEIGHT - MIN_WEIGHT + 1)) + MIN_WEIGHT;
 }
@@ -65,11 +68,16 @@ function handlePlankClick(event) {
 function handlePlankMove(event) {
   const position = event.offsetX;
   const plankWidth = plankElement.clientWidth;
+  const pivot = plankWidth / 2;
+  const from = Math.min(pivot, position);
+  const to = Math.max(pivot, position);
+  const middle = (from + to) / 2;
+  const distance = Math.abs(position - pivot);
 
   if (position < 0 || position > plankWidth) {
-    if (previewWeight) {
-      previewWeight.style.display = 'none';
-    }
+    if (previewWeight) previewWeight.style.display = 'none';
+    if (distanceLine) distanceLine.style.display = 'none';
+    if (distanceLabel) distanceLabel.style.display = 'none';
     return;
   }
 
@@ -79,6 +87,26 @@ function handlePlankMove(event) {
     plankElement.append(previewWeight);
   }
 
+  if (!distanceLine) {
+    distanceLine = document.createElement('div');
+    distanceLine.className = 'distance-line';
+    plankElement.append(distanceLine);
+  }
+
+  if (!distanceLabel) {
+    distanceLabel = document.createElement('div');
+    distanceLabel.className = 'distance-label';
+    plankElement.append(distanceLabel);
+  }
+
+  distanceLine.style.display = 'block';
+  distanceLine.style.left = `${from}px`;
+  distanceLine.style.width = `${to - from}px`;
+
+  distanceLabel.style.display = 'block';
+  distanceLabel.style.left = `${middle}px`;
+  distanceLabel.textContent = `${distance} px`;
+
   previewWeight.style.display = 'flex';
   previewWeight.style.left = `${position}px`;
   previewWeight.textContent = state.nextWeight;
@@ -86,9 +114,9 @@ function handlePlankMove(event) {
 }
 
 function handlePlankLeave() {
-  if (previewWeight) {
-    previewWeight.style.display = 'none';
-  }
+  if (previewWeight) previewWeight.style.display = 'none'
+  if (distanceLine) distanceLine.style.display = 'none';
+  if (distanceLabel) distanceLabel.style.display = 'none';
 }
 
 function handleReset() {
