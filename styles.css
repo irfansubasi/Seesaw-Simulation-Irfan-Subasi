@@ -121,3 +121,15 @@ main {
   background: #ff6336;
   transform: scale(1.02);
 }
+
+.weight {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  transform: translateX(-50%);
+}
