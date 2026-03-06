@@ -83,7 +83,7 @@ function calculatePhysics() {
 
   const netTorque = rightTorque - leftTorque;
 
-  const angle = Math.max(netTorque / 10, Math.min(-MAX_ANGLE, MAX_ANGLE));
+  const angle = Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, (netTorque / 10)));
 
   state.angle = angle;
 
