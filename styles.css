@@ -187,6 +187,35 @@ main {
   z-index: 10;
 }
 
+.logs {
+  width: 100%;
+  height: 150px;
+  overflow-y: auto;
+  background: #28282b;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.log-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.log-list li {
+  font-size: 14px;
+  background: #18181b;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.markdown {
+  color: #fd5c27;
+  font-weight: 600;
+}
+
 @keyframes drop {
   from {
     transform: translateX(-50%) translateY(-50px);

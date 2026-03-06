@@ -4,6 +4,7 @@ const rightWeightElement = document.querySelector('.right-weight-value');
 const nextWeightElement = document.querySelector('.next-weight-value');
 const angleElement = document.querySelector('.angle-value');
 const resetButton = document.querySelector('.btn');
+const logsListElement = document.querySelector('.log-list');
 
 const STORAGE_KEY = 'seesaw-state';
 
@@ -56,13 +57,10 @@ function handlePlankClick(event) {
 
   if (previewWeight) {
     previewWeight.textContent = state.nextWeight;
-    previewWeight.classList.add(getWeightClass(state.nextWeight));
   }
 
-  calculatePhysics();
-  renderWeights(newObject);
-  updateInfo();
   saveLocalStorage();
+  render(newObject);
 }
 
 function handlePlankMove(event) {
@@ -123,12 +121,10 @@ function handleReset() {
   state.objects = [];
   state.angle = 0;
   state.nextWeight = getRandomWeight();
-  plankElement.style.transform = 'rotate(0deg)';
-
-  renderWeights();
-  updateInfo();
 
   localStorage.removeItem(STORAGE_KEY);
+
+  render();
 }
 
 function renderWeights(lastAdded = null) {
@@ -192,6 +188,34 @@ function updateInfo() {
   angleElement.textContent = `${state.angle.toFixed(1)}°`;
 }
 
+function renderLogs() {
+  logsListElement.innerHTML = '';
+
+  for (let i = state.objects.length - 1; i >= 0; i--) {
+
+    const item = state.objects[i];
+    const side = item.distance < 0 ? 'left' : 'right';
+    const distanceAbs = Math.round(Math.abs(item.distance));
+
+    const li = document.createElement('li');
+
+    li.innerHTML =
+      `<span class="markdown">${item.weight} kg</span> ` +
+      `dropped on the <span class="markdown">${side}</span> side ` +
+      `at <span class="markdown">${distanceAbs} px</span> from pivot`;
+    logsListElement.append(li);
+  }
+
+  logsListElement.scrollTop = 0;
+}
+
+function render(lastAdded = null) {
+  calculatePhysics();
+  renderWeights(lastAdded);
+  renderLogs();
+  updateInfo();
+}
+
 function saveLocalStorage() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 }
@@ -213,10 +237,7 @@ function loadLocalStorage() {
 
 function init() {
   loadLocalStorage();
-
-  calculatePhysics();
-  renderWeights();
-  updateInfo();
+  render();
 
   plankElement.addEventListener('click', handlePlankClick);
   plankElement.addEventListener('mousemove', handlePlankMove);
