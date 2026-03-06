@@ -198,9 +198,7 @@ function saveLocalStorage() {
 
 function loadLocalStorage() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  console.log(saved);
   if (!saved) return;
-  console.log(saved);
 
   try {
     const parsed = JSON.parse(saved);
