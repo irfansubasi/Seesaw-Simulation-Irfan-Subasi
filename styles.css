@@ -162,3 +162,16 @@ main {
   height: 30px;
   background: #ef4444;
 }
+
+.weight-drop {
+  animation: drop 0.3s ease-in-out;
+}
+
+@keyframes drop {
+  from {
+    transform: translateX(-50%) translateY(-50px);
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}

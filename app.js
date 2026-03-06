@@ -57,7 +57,7 @@ function handlePlankClick(event) {
   }
 
   calculatePhysics();
-  renderWeights();
+  renderWeights(newObject);
   updateInfo();
   saveLocalStorage();
 }
@@ -103,7 +103,7 @@ function handleReset() {
   localStorage.removeItem(STORAGE_KEY);
 }
 
-function renderWeights() {
+function renderWeights(lastAdded = null) {
   const existingWeights = document.querySelectorAll('.weight:not(.weight-preview)');
 
   existingWeights.forEach(item => item.remove());
@@ -113,6 +113,10 @@ function renderWeights() {
 
     weightElement.classList.add('weight');
     weightElement.classList.add(getWeightClass(item.weight));
+
+    if (lastAdded && item === lastAdded) {
+      weightElement.classList.add('weight-drop');
+    }
 
     weightElement.style.left = `${item.position}px`;
     weightElement.textContent = item.weight;
