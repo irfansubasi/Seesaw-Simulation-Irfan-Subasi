@@ -142,6 +142,7 @@ main {
 .weight-preview {
   opacity: 0.5;
   border-style: dashed;
+  z-index: 10;
 }
 
 .weight-small {
