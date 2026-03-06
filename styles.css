@@ -134,9 +134,6 @@ main {
   font-weight: 600;
   color: #000000;
   transform: translateX(-50%);
-  background: #22c55e;
-  width: 30px;
-  height: 30px;
   border: 2px solid #ffffff;
   pointer-events: none;
 }
@@ -144,4 +141,22 @@ main {
 .weight-preview {
   opacity: 0.5;
   border-style: dashed;
+}
+
+.weight-small {
+  width: 20px;
+  height: 20px;
+  background: #22c55e;
+}
+
+.weight-medium {
+  width: 25px;
+  height: 25px;
+  background: #facc15;
+}
+
+.weight-large {
+  width: 30px;
+  height: 30px;
+  background: #ef4444;
 }
