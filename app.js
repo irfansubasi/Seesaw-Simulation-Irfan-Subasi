@@ -73,7 +73,7 @@ function handlePlankLeave() {
 }
 
 function renderWeights() {
-  const existingWeights = document.querySelectorAll('.weight');
+  const existingWeights = document.querySelectorAll('.weight:not(.weight-preview)');
 
   existingWeights.forEach(item => item.remove());
 
