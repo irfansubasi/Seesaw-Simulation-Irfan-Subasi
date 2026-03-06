@@ -82,7 +82,7 @@ function handlePlankMove(event) {
   previewWeight.style.display = 'flex';
   previewWeight.style.left = `${position}px`;
   previewWeight.textContent = state.nextWeight;
-  previewWeight.classList.add(getWeightClass(state.nextWeight));
+  previewWeight.className = `weight weight-preview ${getWeightClass(state.nextWeight)}`;
 }
 
 function handlePlankLeave() {
