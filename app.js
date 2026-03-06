@@ -34,6 +34,7 @@ function handlePlankClick(event) {
 
   state.nextWeight = getRandomWeight();
 
+  calculatePhysics();
   renderWeights();
 }
 
@@ -54,6 +55,34 @@ function renderWeights() {
   }
 
   plankElement.style.transform = `rotate(${state.angle}deg)`;
+}
+
+function calculatePhysics() {
+  let leftTorque = 0;
+  let rightTorque = 0;
+  let leftWeight = 0;
+  let rightWeight = 0;
+
+  for (const item of state.objects) {
+    const distance = Math.abs(item.distance);
+    const torque = distance * item.weight;
+
+    if (item.distance < 0) {
+      leftTorque += torque;
+      leftWeight += item.weight;
+    } else {
+      rightTorque += torque;
+      rightWeight += item.weight;
+    }
+  }
+
+  const netTorque = rightTorque - leftTorque;
+
+  const angle = Math.max(netTorque / 10, Math.min(-MAX_ANGLE, MAX_ANGLE));
+
+  state.angle = angle;
+
+  return { leftWeight, rightWeight };
 }
 
 function init() {
