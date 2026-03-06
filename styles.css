@@ -75,6 +75,7 @@ main {
 }
 
 .plank {
+  position: relative;
   width: 400px;
   height: 10px;
   background: #fd5c27;
