@@ -194,6 +194,8 @@ main {
   background: #28282b;
   padding: 15px;
   border-radius: 8px;
+  scrollbar-width: auto;
+  scrollbar-color: #fd5c27 #373639;
 }
 
 .log-list {
@@ -214,6 +216,24 @@ main {
 .markdown {
   color: #fd5c27;
   font-weight: 600;
+}
+
+.logs::-webkit-scrollbar {
+  width: 8px;
+}
+
+.logs::-webkit-scrollbar-track {
+  background: #373639;
+  border-radius: 10px;
+}
+
+.logs::-webkit-scrollbar-thumb {
+  background: #fd5c27;
+  border-radius: 10px;
+}
+
+.logs::-webkit-scrollbar-thumb:hover {
+  background: #ff6336;
 }
 
 @keyframes drop {
