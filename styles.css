@@ -82,6 +82,7 @@ main {
   cursor: pointer;
   transform-origin: center center;
   transition: transform 0.3s ease-in-out;
+  z-index: 5;
 }
 
 .pivot {
