@@ -20,9 +20,8 @@ function getRandomWeight() {
 }
 
 function handlePlankClick(event) {
-  const rect = plankElement.getBoundingClientRect();
-  const click = event.clientX - rect.left;
-  const plankWidth = rect.width;
+  const click = event.offsetX;
+  const plankWidth = plankElement.clientWidth;
   const pivot = plankWidth / 2;
   const distance = click - pivot;
 
