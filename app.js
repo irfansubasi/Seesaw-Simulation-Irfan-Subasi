@@ -1,4 +1,8 @@
 const plankElement = document.querySelector('.plank');
+const leftWeightElement = document.querySelector('.left-weight-value');
+const rightWeightElement = document.querySelector('.right-weight-value');
+const nextWeightElement = document.querySelector('.next-weight-value');
+const angleElement = document.querySelector('.angle-value');
 
 const MAX_ANGLE = 30;
 
@@ -36,6 +40,7 @@ function handlePlankClick(event) {
 
   calculatePhysics();
   renderWeights();
+  updateInfo();
 }
 
 function renderWeights() {
@@ -83,6 +88,15 @@ function calculatePhysics() {
   state.angle = angle;
 
   return { leftWeight, rightWeight };
+}
+
+function updateInfo() {
+  const { leftWeight, rightWeight } = calculatePhysics();
+
+  leftWeightElement.textContent = `${leftWeight.toFixed(1)} kg`;
+  rightWeightElement.textContent = `${rightWeight.toFixed(1)} kg`;
+  nextWeightElement.textContent = `${state.nextWeight.toFixed(1)} kg`;
+  angleElement.textContent = `${state.angle.toFixed(1)}°`;
 }
 
 function init() {
