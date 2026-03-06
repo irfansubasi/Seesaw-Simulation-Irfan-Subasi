@@ -3,6 +3,7 @@ const leftWeightElement = document.querySelector('.left-weight-value');
 const rightWeightElement = document.querySelector('.right-weight-value');
 const nextWeightElement = document.querySelector('.next-weight-value');
 const angleElement = document.querySelector('.angle-value');
+const resetButton = document.querySelector('.btn');
 
 const MAX_ANGLE = 30;
 
@@ -72,6 +73,16 @@ function handlePlankLeave() {
   }
 }
 
+function handleReset() {
+  state.objects = [];
+  state.angle = 0;
+  state.nextWeight = getRandomWeight();
+  plankElement.style.transform = 'rotate(0deg)';
+
+  renderWeights();
+  updateInfo();
+}
+
 function renderWeights() {
   const existingWeights = document.querySelectorAll('.weight:not(.weight-preview)');
 
@@ -132,6 +143,7 @@ function init() {
   plankElement.addEventListener('click', handlePlankClick);
   plankElement.addEventListener('mousemove', handlePlankMove);
   plankElement.addEventListener('mouseleave', handlePlankLeave);
+  resetButton.addEventListener('click', handleReset);
 }
 
 init();
