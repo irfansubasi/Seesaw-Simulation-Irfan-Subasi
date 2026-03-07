@@ -168,8 +168,8 @@ function handlePlankClick(event) {
     previewWeight.textContent = state.nextWeight;
   }
 
-  saveLocalStorage();
   render(newObject);
+  saveLocalStorage();
 }
 
 function handlePlankMove(event) {
