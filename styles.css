@@ -65,6 +65,8 @@ main {
 .seesaw {
   width: 100%;
   background: #28282b;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .seesaw-wrapper {
@@ -73,6 +75,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 400px;
 }
 
 .plank {
@@ -246,5 +249,19 @@ main {
   }
   to {
     transform: translateX(-50%) translateY(0);
+  }
+}
+
+@media (max-width: 704px) {
+  .info-box-wrapper {
+    flex-direction: column;
+  }
+
+  main {
+    padding: 5px;
+  }
+
+  .seesaw {
+    padding: 10px;
   }
 }
